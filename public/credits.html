@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Video - Interview OSS — Open-source credits</title><style>body{max-width:860px;margin:50px auto;padding:0 24px;background:#f6f7f1;color:#24483b;font:16px system-ui;line-height:1.7}pre{white-space:pre-wrap;font:inherit}h1,h2{line-height:1.3}a{color:inherit}</style><a href="/">← Video - Interview OSS</a><h1>Open-source credits</h1><p>Built with React, Vite, Radix Dialog, Lucide, Express, faster-whisper and ffmpeg. The implementation also adapts the recorder lifecycle and transcription code documented below. Third-party packages retain their respective licences.</p><h2>Recorder reuse</h2><pre># Recorder reuse and attribution
+
+This recorder adapts the recording lifecycle used by the supplied
+[`one-way-interview-practice`](https://github.com/Dinesh-Kalamegam/one-way-interview-practice)
+project. Its `src/components/QuestionPage.js` imports `react-video-recorder`, passes
+the selected countdown and answer time limit to that component, and shows the
+preview/replay controls. The project is MIT licensed (copyright Dinesh Kalamegam,
+2021); its original license remains in that repository.
+
+The actual recorder implementation is the MIT-licensed
+[`react-video-recorder` 3.17.1](https://github.com/fbaiodias/react-video-recorder),
+which the supplied project lists as a dependency. This app adapts these exact
+implementation areas from its published `lib/video-recorder.js`:
+
+- MIME selection in `getMimeType` (lines 217–222): choose a browser-supported
+  recording format before constructing `MediaRecorder`.
+- `handleStartRecording` and `startRecording` (lines 319–380): transition from
+  the countdown into recording, attach data/stop/error handlers, start with a
+  timeslice, and schedule the answer time limit.
+- `handleStop` (lines 389–420): assemble the collected chunks into a `Blob` and
+  report the measured recording duration after the recorder stops.
+
+The adaptation is in `src/lib/capture.ts` and `src/components/Recorder.tsx`.
+It receives the already-open `MediaStream` from its parent, uses a 1-second
+timeslice, and keeps the parent responsible for stopping shared tracks. The
+React component adds preparation and recording controls, periodic JPEG frame
+capture, a muted mirrored preview, and cleanup for timers and recorder state.
+Frame capture starts at the beginning and includes a final sample. It uses a
+four-second cadence for shorter answers, stretches the cadence across longer
+answers to keep the first and final moments within the 24-frame cap, and saves
+frames at their natural unmirrored orientation. Result duration and frame
+timestamps are seconds. An ended camera or microphone track reports an error;
+the component does not stop parent-owned tracks.
+
+This is an adaptation, not a verbatim copy of the package component. The package
+itself is not installed as an app dependency because it acquires and stops its
+own camera stream, while this app&#x27;s parent owns the stream lifecycle.
+
+The adapted implementation is distributed under the package&#x27;s MIT terms:
+
+&gt; MIT License
+&gt;
+&gt; Copyright (c) 2019 Francisco Baio Dias
+&gt;
+&gt; Permission is hereby granted, free of charge, to any person obtaining a copy
+&gt; of this software and associated documentation files (the &quot;Software&quot;), to deal
+&gt; in the Software without restriction, including without limitation the rights
+&gt; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+&gt; copies of the Software, and to permit persons to whom the Software is
+&gt; furnished to do so, subject to the following conditions:
+&gt;
+&gt; The above copyright notice and this permission notice shall be included in all
+&gt; copies or substantial portions of the Software.
+&gt;
+&gt; THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+&gt; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+&gt; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+&gt; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+&gt; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+&gt; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+&gt; SOFTWARE.
+</pre><h2>Analysis reuse</h2><pre># Analysis implementation and reuse
+
+Reviewed and built on 28 September 2026. This is voluntary interview practice coaching. It does not produce candidate rankings, hiring decisions, personality, emotion, honesty or employability scores.
+
+## The supplied repositories
+
+Both repositories were cloned into `/tmp/tcla-analysis-reuse/` and their actual root `LICENSE` files inspected. Both are MIT licensed. Inspection is distinct from adopting every component.
+
+| Repository | Inspected commit | Actual use |
+|---|---|---|
+| [Crimson-Genesis/TIPS](https://github.com/Crimson-Genesis/TIPS) | `6ac7b6b10ae13deb4cec80b9ef334196e3d6f58b` | Reused `split_long_segments` from `backend/backend/src/stage1_extraction/candidate_audio.py`, retained in `server/vendor/tips/segmentation.py`. Adapted its faster-whisper word timestamp mapping, voice activity filtering and transcription settings in `scripts/transcribe.py`. |
+| [Mohamed-samy2/Video-Interview-Analysis](https://github.com/Mohamed-samy2/Video-Interview-Analysis) | `0daad32321b81d6c2b03a35106e3a95b2c075a23` | Inspected the actual backend, including `Ai/Text_Model/Helper.py`, audio/video models and HR scoring. No source code copied: its MoviePy/audio helper is coupled to application upload storage, its transcription returns untimed text, and its personality, emotion, cheating and hiring scoring do not fit this practice scope. |
+
+The complete original TIPS licence is retained at `server/vendor/tips/LICENSE`. The original PRVIA licence is retained at `server/vendor/PRVIA-LICENSE` as an inspection record, not a claim that its code was adopted. The TIPS splitter preserves its original function body; imports unrelated to that function were removed. Source attribution and commit are recorded in its module header.
+
+Our transcription wrapper changes TIPS&#x27;s `small` model to `base` for local responsiveness; uses ffmpeg to decode the complete recording to mono 16 kHz PCM; returns the app&#x27;s timestamped contract; estimates WPM from transcribed words / complete recording time; counts internal word gaps of at least 1.5 seconds; removes private application storage, interviewer pairing, pitch, emotion, personality and semantic hiring scores. It does not reuse TIPS&#x27;s behaviour metrics function, whose `speech_rate` uses feature count rather than word count.
+
+</pre><h2>TIPS licence</h2><pre>MIT License
+
+Copyright (c) 2026
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</pre><h2>Original practice app licence</h2><pre>MIT License
+
+Copyright (c) [2021] [Dinesh Kalamegam]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWAR</pre></html>
