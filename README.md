@@ -37,8 +37,6 @@ More product views: [feedback and replay evidence](docs/screenshots/feedback-evi
 - **Save and retry:** keep the latest session in the browser, download answers, and retry failed analysis without re-recording.
 - **A searchable question library:** 200 numbered TCLA questions plus an additional unnumbered prompt, shown as 201 entries.
 
-This is a working local prototype. Feedback is practice coaching, not an official marking scheme or a prediction of hiring success. Camera feedback uses still images; it does not analyse continuous video or vocal tone.
-
 ## Quick start
 
 You need **Node.js 24**, **Python 3.10+**, **ffmpeg**, and a browser with camera/microphone and MediaRecorder support. The instructions below use a macOS/Linux shell. Windows users need equivalent Python environment and executable paths; Windows setup has not been validated here.
