@@ -15,12 +15,12 @@ No account or hosted recording library. Bring your own OpenRouter key for AI fee
     <td width="50%"><img src="docs/screenshots/session-feedback.jpg" alt="Actual session feedback with overall practice grade and improvement summary" /></td>
     <td width="50%"><img src="docs/screenshots/answer-feedback-blurred.png" alt="Answer replay and individual feedback with the speaker's face fully blurred" /></td>
   </tr>
-  <tr><td>Your next step, a little clearer.</td><td>Replay an answer and understand its feedback.</td></tr>
+  <tr><td><strong>Session overview:</strong> Your overall practice score and feedback across all three answers.</td><td><strong>Answer review:</strong> Replay your recording and see how your answer was assessed.</td></tr>
   <tr>
     <td><img src="docs/screenshots/feedback-next-steps.jpg" alt="Three concrete next steps following a completed practice session" /></td>
     <td><img src="docs/screenshots/camera-feedback-blurred.png" alt="Camera coaching with evidence timestamps and fully blurred camera thumbnails" /></td>
   </tr>
-  <tr><td>Choose what to practise next.</td><td>See what to adjust on camera.</td></tr>
+  <tr><td><strong>Next steps:</strong> Three suggested improvements for your next practice session.</td><td><strong>Camera feedback:</strong> Timestamped observations on framing and posture, with practical suggestions.</td></tr>
 </table>
 
 These show an actual saved practice session. The face in the replay screenshot and the camera thumbnails have been heavily blurred for privacy; those two images were edited and upscaled. Scores and feedback illustrate the interface, not a validated assessment of interview readiness. No original recording or unblurred camera image is included.

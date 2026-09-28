@@ -2,6 +2,12 @@
 
 Start with the [README](README.md), [architecture](architecture.md), and [agent onboarding guide](docs/AI_AGENT_ONBOARDING.md). Keep changes focused and explain the user-visible behavior they address.
 
+## Reporting a security vulnerability
+
+Please report suspected security vulnerabilities privately to [vedantopensource@gmail.com](mailto:vedantopensource@gmail.com). **Do not open a public issue or pull request for a security vulnerability**, as this could expose the problem before a fix is available.
+
+Include a description of the issue, the affected version or commit, steps to reproduce it, and its potential impact. Use a minimal, sanitised example; do not send real API keys, personal recordings, or other sensitive data. Please allow time to investigate and coordinate a fix before publishing details or submitting a public fix.
+
 ## Local checks
 
 Use Node.js 24 and install dependencies with `npm ci`. Python and ffmpeg are needed for actual transcription, but the unit tests use controlled dependencies/provider responses.
