@@ -23,7 +23,6 @@ No account or hosted recording library. Bring your own OpenRouter key for AI fee
   <tr><td><strong>Next steps:</strong> Three suggested improvements for your next practice session.</td><td><strong>Camera feedback:</strong> Timestamped observations on framing and posture, with practical suggestions.</td></tr>
 </table>
 
-These show an actual saved practice session. The face in the replay screenshot and the camera thumbnails have been heavily blurred for privacy; those two images were edited and upscaled. Scores and feedback illustrate the interface, not a validated assessment of interview readiness. No original recording or unblurred camera image is included.
 
 More product views: [feedback and replay evidence](docs/screenshots/feedback-evidence.jpg) · [session reasoning](docs/screenshots/session-reasoning-evidence.jpg) · [home](docs/screenshots/home.jpg) · [question bank](docs/screenshots/question-bank.jpg) · [settings](docs/screenshots/settings.jpg).
 
