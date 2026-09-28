@@ -10,6 +10,9 @@ const screenshots = new Set([
   'docs/screenshots/session-feedback.jpg',
   'docs/screenshots/feedback-evidence.jpg',
   'docs/screenshots/answer-feedback-blurred.png',
+  'docs/screenshots/feedback-next-steps.jpg',
+  'docs/screenshots/session-reasoning-evidence.jpg',
+  'docs/screenshots/camera-feedback-blurred.png',
 ]);
 const forbiddenPath = /(^|\/)(?:node_modules|dist|coverage|tmp|sources|recordings|uploads|exports|dev-assets|__pycache__|\.venv|venv|\.cache|test-results|playwright-report)(?:\/|$)|^docs\/(?:qa\/|PDD\.md$)|^(?:Product_Flow|Video_Interview_Practice_Actionable_Insights|Video_Interview_Review_Detailed_Notes)\.md$|(^|\/)(?:\.env(?:\..*)?|\.npmrc|credentials[^/]*|secrets[^/]*)$/i;
 const privateExtension = /\.(?:webm|mp4|mov|mkv|avi|wav|mp3|m4a|aiff?|flac|ogg|png|jpe?g|webp|gif|heic|pdf|zip|sqlite\d*|db|pem|key|p12|pfx|pyc|pyo)$/i;
